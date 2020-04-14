@@ -2,7 +2,8 @@
   "name": "kendall",
   "private": true,
   "engines": {
-    "node": "13.12.x"
+    "node": "13.12.x",
+    "yarn": "1.21.x"
   },
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.9.4",
