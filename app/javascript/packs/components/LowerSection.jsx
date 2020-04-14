@@ -25,7 +25,7 @@ var NewForm = createReactClass({
     
     getInitialState: function() {
       return {
-        name: '',
+        name: 'BOB',
         phone: '',
         email: '',
         company: '',
@@ -48,7 +48,7 @@ var NewForm = createReactClass({
           method: 'POST',
           data: { event: self.state },
           success: function(data) {
-            //self.props.handleAdd(data);
+            self.props.handleAdd(data);
             self.setState(self.getInitialState());
           },
           error: function(xhr, status, error) {
@@ -138,9 +138,10 @@ var NewForm = createReactClass({
 
 
   function handleAdd(event) {
-    var events = this.state.events;
-    events.push(event);
-    this.setState({ events: events });
+    //var events = this.state.events;
+    //events.push(event);
+    //this.setState({ events: events });
+    console.log(event);
   }
 
 
@@ -151,7 +152,7 @@ function LowerSection(props){
 
         <Section>
             
-            <NewForm/>
+            <NewForm handleAdd={handleAdd} />
 
         </Section>
        
