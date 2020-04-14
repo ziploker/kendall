@@ -19,9 +19,10 @@ const StyledMenu = styled.nav`
   z-index: 3;
   
   transform: ${({ open }) => open ? 'translateX(0px)' : 'translateX(500px)'};
+  //transform: ${({ open }) => open ? 'scale(0,1)' : 'scale(1,1)'};
   
   @media (max-width: ${({ theme }) => theme.mobile}) {
-    width: 100%;
+    //width: 100%;
   }
 
   a {
@@ -36,8 +37,8 @@ const StyledMenu = styled.nav`
     transition: color 0.3s linear;
     
     @media (max-width: ${({ theme }) => theme.mobile}) {
-      font-size: 1.5rem;
-      text-align: center;
+      //font-size: 1.5rem;
+      //text-align: center;
     }
 
     &:hover {

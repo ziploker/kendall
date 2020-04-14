@@ -31,8 +31,10 @@ function App(){
    
     useEffect(() => {
 
-      console.log("UseEffect Start, open = " + open);
+      console.log("UseEffect Start, open state is currently " + open);
+      
       const listener = event => {
+        
         if (!ref.current || ref.current.contains(event.target)) {
 
           console.log("nada");
@@ -55,6 +57,7 @@ function App(){
       document.addEventListener('mousedown', listener);
       
       return () => {
+        console.log("cleanup first line");
         document.removeEventListener('mousedown', listener);
         console.log("cleanup");
         console.log("cleanup done, open = " + open);
@@ -69,7 +72,7 @@ function App(){
             <>  
                 
                     <GlobalStyles/>
-                    <div className="tester" ref={ref}>
+                    <div style={{position: "relative"}} className="tester" ref={ref}>
                     <Topbar open={open} setOpen={setOpen}  />
                     
                     <Menu open={open}  />
