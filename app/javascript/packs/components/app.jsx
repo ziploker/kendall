@@ -51,6 +51,7 @@ function App(){
       }
 
       window.addEventListener("resize", handleResize);
+      window.addEventListener("orientationchange", handleResize);
       document.addEventListener('mousedown', listener);
       
       return () => {
