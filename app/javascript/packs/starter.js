@@ -1,8 +1,9 @@
-import ReactOnRails from 'react-on-rails';
+import ReactOnRails from 'react-on-rails'
 
-import Topbar from "./components/Topbar";
+import App from './components/app'
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
-  Topbar,
+  App
 });
+

@@ -3,7 +3,12 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-body{
+.wrap{
+	height: 50px;
+}
+/*
+
+*{
 
     margin: 0;
 
@@ -11,3 +16,228 @@ body{
 
     box-sizing: border-box;
 }
+
+
+
+/////////////////////  hamburger X ///////////////
+.expand_menu_checkbox {
+	display: none;
+}
+
+
+
+
+.hamburger_menu_label{
+
+	//float: right;
+	height: 80px;
+	display: inline-block;
+	line-height: 80px;
+	vertical-align: middle;
+	
+	cursor: pointer;
+    @media only screen and (min-width: 850px){
+    
+        display: none;
+
+    }
+}
+
+
+
+
+
+.menu{
+
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 80px;
+	right: 0;
+	list-style: none;
+	overflow: hidden;
+	
+	width: 200px;
+	
+	z-index: 25;
+	
+	max-height: 0;
+	transition: max-height .2s ease-out;
+	
+
+	@media only screen and (min-width: 850px){
+    
+		display: none     
+ 
+	 }  
+
+}
+
+
+
+.menu a{
+
+	display: block;
+	//outline: 1px solid red;
+	padding: 20px;
+	//border-right: 1px solid green;
+
+
+}
+
+.menu a:hover{
+
+	//background-color: red;
+}
+
+
+.hamburger_menu{
+
+	background-color: rgba(8, 7, 7, 1);
+	display: inline-block;
+	height: 2px;
+	width: 18px;
+	position: relative;
+	transition:backround .2s ease-out;
+	
+	vertical-align: middle;
+}
+
+.hamburger_menu:before{
+	background-color: rgba(8, 7, 7, 1);
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	transition: all .2s ease-out;
+	top: 6px;
+}
+
+.hamburger_menu:after{
+	background-color: rgba(8, 7, 7, 1);
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: -7px;
+	transition: all .2s ease-out;
+}
+
+
+.expand_menu_checkbox:checked ~ .menu{
+
+	max-height: 300px;
+}
+
+.expand_menu_checkbox:checked ~ .hamburger_menu_label .hamburger_menu{
+ 	background: transparent;
+}
+
+.expand_menu_checkbox:checked ~ .hamburger_menu_label .hamburger_menu:before{
+	transform: rotate(-45deg);
+	top: 0;
+	
+}
+
+.expand_menu_checkbox:checked ~ .hamburger_menu_label .hamburger_menu:after{
+
+	transform: rotate(45deg);
+	top: 0;
+}
+
+
+
+
+
+/////////////////////  button  styLe    /////////////  
+
+
+.btn{
+
+	//text-decoration: none;
+	background-color: red;
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	//margin: 0 auto;
+	//float: right;
+
+	line-height: 50px;
+ 	 white-space: nowrap;
+
+
+ 	color:#444;
+    border:1px solid #CCC;
+    background:#DDD;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    //vertical-align:middle;
+    //max-width: 100px;
+    //padding: 5px;
+    //text-align: center;
+
+    -webkit-user-select: none;  Safari       
+	-moz-user-select: none;  Firefox 
+	-ms-user-select: none;  IE10+/Edge 
+	user-select: none;  Standard 
+
+} 
+
+.btnV2{
+
+	text-decoration: none;
+	background-color: red;
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	//margin: 0 auto;
+	//float: right;
+
+	line-height: 18px;
+ 	white-space: nowrap;
+ 	color: rgb(63, 63, 63);
+
+ 	background: #C8C0C0;
+    
+    //background: rgba(black, .9);
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    //vertical-align:middle;
+    //max-width: 100px;
+    //padding: 5px;
+    //text-align: center;
+
+    -webkit-user-select: none; /* Safari       
+	-moz-user-select: none; /* Firefox 
+	-ms-user-select: none; /* IE10+/Edge 
+	user-select: none; /* Standard 
+
+}
+
+.btnV2:hover{
+
+	background: #e0c9c9;
+	color: rgb(38, 38, 38);
+
+}
+
+a{
+	text-align: center;
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: .8rem;
+
+
+}
+
+
+
+
+*/
+
+
+
+
+

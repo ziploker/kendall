@@ -1,29 +1,31 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import logoPng from "../../../assets/images/logo.png";
+import logoPng from "../../../assets/images/logo.png"
 //import welcome from "../../../assets/stylesheets/welcome.scss"
-import { gsap } from 'gsap';
+import { gsap } from 'gsap'
 
+import backgroundVid from '../../../assets/images/backgroundVid.mp4'
 
+import GlobalStyles from "./global"
+import Burger from './burger'
+import Menu from './menu'
 
+const Wrapperr = styled.header`
 
-const Wrapper = styled.header`
-
-    background: pink;
+    //box-sizing: border-box;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 30px 7%;
+    padding: 0px 13%;
+    //background: gray;
+    height: 80px;
+    border-bottom: 1px solid gray;
     
-
     
-    
-    
-
 `;
 
 const Img = styled.img`
-    width: 160px;
+    width: 222px;
     cursor: pointer;
     margin-right: auto;
     transform: translate(30px,-30px);
@@ -39,7 +41,11 @@ const Img = styled.img`
 
 
 const Nav = styled.nav`
+    @media only screen and (max-width: 850px){
+    
+       display: none     
 
+    }   
     transform: translate(-30px,-30px);
     opacity: 0;
     
@@ -49,11 +55,11 @@ const Nav = styled.nav`
 
         li, a{
             
-            font-family: 'Nunito', sans-serif;
+        
             font-weight: 500;
             font-size: 16px;
             
-            color: black;
+            color: orangered;
             
             text-decoration: none;
         
@@ -86,7 +92,11 @@ const Nav = styled.nav`
 
 `;
 
-function Topbar(props){
+
+
+
+
+function Topbar({open, setOpen}){
     
     const logo = React.createRef();
     const navbar = React.createRef();
@@ -100,8 +110,8 @@ function Topbar(props){
     
     
     return (
-        <Wrapper>
-            
+        <Wrapperr>
+                
             <Img ref={logo} src={logoPng} alt="company logo" />
 
             <Nav ref={navbar}>
@@ -115,9 +125,13 @@ function Topbar(props){
 
             </Nav>
 
+            
 
+            <Burger open={open} setOpen={setOpen}/>
 
-        </Wrapper>
+           
+
+        </Wrapperr>
     )
 }
 
