@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {Component, useEffect, useState} from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import $ from 'jquery';
-
-
+import lilDownArrow from '../../../assets/images/lilDownArrow.svg'
+import '../components/fix.js'
 
 
 
@@ -16,10 +16,7 @@ const Section = styled.section`
     min-height: 400px;
     position: relative;
 
-
 `;
-var createReactClass = require('create-react-class');
-
 
 
 const Form = styled.form`
@@ -27,10 +24,9 @@ const Form = styled.form`
   display: grid;
   //grid-template-columns: 90%;
   grid-gap: 1.5rem;
-  
-
 
 `;
+
 
 const FormWrapper = styled.div`
 
@@ -39,143 +35,266 @@ const FormWrapper = styled.div`
   padding: 20px;
 `;
 
-var NewForm = createReactClass({
-    
-    
-    getInitialState: function() {
-      return {
-        name: '',
-        phone: '',
-        email: '',
-        company: '',
-        zip: '',
-        message: ''
-      }
-    },
-    handleAdd: function(e) {
-      e.preventDefault();
-      var self = this;
-      if (this.validForm()) {
-        const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");  
-        $.ajax({
-            
-          url: '/leads',
-          headers: {
-            
-            'X-CSRF-Token': csrf
-          },
-          method: 'POST',
-          data: { event: self.state },
-          success: function(data) {
-            self.props.handleAdd(data);
-            self.setState(self.getInitialState());
-          },
-          error: function(xhr, status, error) {
-            alert('Cannot add a new record: ', error);
-          }
-        })
-      } else {
-        alert('Please fill all fields.');
-      }
-    },
-    validForm: function() {
-      if (this.state.name && this.state.phone &&
-          this.state.email && this.state.company &&
-          this.state.zip && this.state.message) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    handleChange: function(e) {
-      var input_name = e.target.name;
-      var value = e.target.value;
-      this.setState({ [input_name] : value });
-    },
-    render: function() {
-      return(
+const OptionWrapper = styled.div`
 
-        <FormWrapper>
-          <Form className="form-inline" onSubmit={this.handleAdd}>
-            
-            <div className="form-group">
-            <label>Name</label><br/>
-              <input type="text"
-                    className="form-control"
-                    name="name"
-                    placeholder=""
-                    ref="name"
-                    value={this.state.name}
-                    onChange={this.handleChange} />
-            </div>
-            
-            
-            <div className="form-group">
-            <label>Phone Number</label><br/>
-              <input type="text"
-                    className="form-control"
-                    name="phone"
-                    placeholder="(305) 555-3210"
-                    ref="phone"
-                    value={this.state.phone}
-                    onChange={this.handleChange} />
-            </div>
-            
-            
-            <div className="form-group">
-            <label>Email</label><br/>
-              <input type="text"
-                    className="form-control"
-                    name="email"
-                    placeholder=""
-                    ref="email"
-                    value={this.state.email}
-                    onChange={this.handleChange} />  
-            </div>
-            
-            
-            <div className="form-group">
-            <label>What type of service do you need?</label><br/>
-              <select value={this.state.value} onChange={this.handleChange}>
-                <option value="home/personal">Home/Personal</option>
-                <option value="business">Business</option>
-                <option value="other">Other</option>
-                
-              </select>
-            </div>
-            
-            
-            <div className="form-group">
-            <label>Zip Code</label><br/>
-              <input type="text"
-                    className="form-control"
-                    name="zip"
-                    placeholder=""
-                    ref="zip"
-                    value={this.state.zip}
-                    onChange={this.handleChange} />
-            </div>
-            
+
+`;
+
+
+
+function NewForm(props) {
+
+
+  const [state, setState] = React.useState({
+
+    
+    name: '',
+    nameIsFocused: false,
+    phone: '',
+    phoneIsFocused: false,
+    email: '',
+    emailIsFocused: false,
+    company: '',
+    companyIsFocused: false,
+    zip: '',
+    zipIsFocused: false,
+    message: '',
+    messageIsFocused: false,
+    error: '',
+    activeIndex: null
+
+  })
+    
+   
+  
+  const handleAdd = e => {
+    
+    e.preventDefault();
+    
+    if (validForm()) {
+      
+      //get token for form submission
+      const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");  
+      $.ajax({
           
-            <div className="form-group">
-              <label>Message</label><br/>
-              <input type="text"
-                    className="form-control"
-                    name="message"
-                    placeholder=""
-                    ref="message"
-                    value={this.state.message}
-                    onChange={this.handleChange} />
-            </div>
-            <button type="submit" className="btn btn-primary">Add</button>
-          </Form>
-        </FormWrapper>
-      )
+        url: '/leads',
+        headers: {
+          
+          'X-CSRF-Token': csrf
+        },
+        method: 'POST',
+        data: { 
+          event: {
+            name: state.name,
+            phone: state.phone,
+            email: state.email,
+            company: state.company,
+            zip: state.zip,
+            message: state.message,
+          }
+        },
+        success: function(data) {
+          //props.handleAdd(data);
+          setState({
+
+            //focussed: (props.focussed) || false,
+            name: '',
+            phone: '',
+            email: '',
+            company: '',
+            zip:  '',
+            message: '',
+            error: props.error || ''
+          });
+          
+          var e = document.getElementById('select');
+          console.log("eeeeeeeeeee is = " + e.value);
+          
+          if (e.value != 'null') {
+           e.style.color = 'white';
+          } else {
+           e.style.color = 'green';
+          }
+    
+        },
+        error: function(xhr, status, error) {
+          alert('Message did not reach server: ', error);
+        }
+      })
+    } else {
+      alert('Please fill all fields.');
     }
-  });
+  }
+
+  
+  const validForm = () => {
+    if (state.name && state.phone &&
+        state.email && state.company &&
+        state.zip && state.message) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //handleChange = e => {
+  //  var input_name = e.target.name;
+  //  var value = e.target.value;
+
+  //  console.log("input_name is " + input_name)
+  //  console.log("value is " + value)
+  //  this.setState({ [input_name] : value });
+  //}
+
+  const handleChange = event => {
+    console.log(event)
+
+    const v = event.target.value;
+
+    const { id } = props;
+    const value = event.target.value;
+    console.log("nameeeeee = " + event.target.name)
+    console.log("valluuee = " + event.target.value)
+    console.log("focus = " + event.target.tagger)
+    
+    setState({ 
+      ...state,
+      [event.target.name]: v,
+      error: '' 
+    });
+    //return onChange(id, value);
+  }
+  
+  
+  const getClass = () =>{
+      
+    if(state.focus === true)
+      return "field focussed";
+    else
+      return "field";
+
+  }
+
+  const { focussed, value, error, label } = state;
+  const { id, type, locked } = props;
+  //const fieldClassName = `field ${(locked ? focussed : focussed || value) && 'focussed'}`;
+  //const fcn = state.nameIsFocused ? "xxxfocused" : "xxxNotfocused"
+  
+  return(
+
+    <FormWrapper>
+      <Form className="form-inline" onSubmit={handleAdd} >
+        
+        
+        <div className="field" >
+        
+          <input type="text"
+            index={1}
+            
+            className="form-control"
+            name="name"
+            
+            placeholder="Name"
+            
+            value={state.name}
+            onChange={handleChange} 
+          />
+        </div>
+
+        
+        
+        <div className="field">
+        
+          <input type="text"
+                index={2}
+                
+                className="form-control"
+                name="phone"
+                focus="phoneIsFocused"
+                placeholder="(305) 555-3210"
+                
+                value={state.phone}
+                onChange={handleChange} 
+                
+              
+                />
+          
+        </div>
+        
+        
+        <div className="field">
+        
+          <input type="text"
+                index={3}
+                className="form-control"
+                name="email"
+                placeholder="Email"
+                
+                value={state.email}
+                onChange={handleChange} 
+                
+                />
+            
+        </div>
+        
+        
+        <div className="field">
+        
+          <select value={state.company} id="select" onChange={handleChange} name="company" index={4}>
+            
+            <option style={{color: "white"}} id="placeHolderText" value="" disabled>Service needed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25bc;</option>
+            
+              
+            
+            <option value="home/personal">Home/Personal</option>
+            <option value="business">Business</option>
+            <option value="other">Other</option>
+            
+          </select>
+          
+        </div>
+        
+        
+        <div className="field">
+        
+          <input type="text"
+                index={5}
+                className="form-control"
+                name="zip"
+                placeholder="Zip Code"
+                
+                value={state.zip}
+                onChange={handleChange} 
+                
+                />
+          
+        </div>
+        
+      
+        <div className="field">
+          
+          <input type="text"
+                index={6}
+                className="form-control"
+                name="message"
+                placeholder="Message"
+                
+                value={state.message}
+                onChange={handleChange} 
+                
+                />
+          
+
+        </div>
+        <button type="submit" className="btn btn-primary">Add</button>
+      </Form>
+    </FormWrapper>
+  )
+}
 
 
-  function handleAdd(event) {
+
+  const handleAdd = (event) => {
     //var events = this.state.events;
     //events.push(event);
     //this.setState({ events: events });

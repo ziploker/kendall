@@ -20,9 +20,7 @@ const Video = styled.video`
     min-width: 100%;
     
 
-    //@media (min-aspect-ratio: 16/9){
-   //     width: 100%;
-    //    height: auto;
+    
     @media screen and (min-width: 1000px){ 
             width: 100%;
             height: auto;
@@ -33,11 +31,7 @@ const Video = styled.video`
             height: 100%;
     }
 
-    //@media (max-aspect-ratio: 16/9){
-
-    //    width: auto;
-    //    height: 100%;
-    //}
+    
 
 `;
 
@@ -53,7 +47,7 @@ const Section = styled.section`
     //background-size: contain;
     //background-position: center center;
     //background-repeat: no-repeat;
-    opacity: .1;
+    opacity: 1;
     height: 100%;
 `;
 const Center = styled.img`
@@ -207,7 +201,7 @@ const Hero = (props) => {
     
     useEffect( () => {
 
-        gsap.to(imageRef.current, {opacity: 1, duration: 1, delay: 1});
+        //gsap.to(imageRef.current, {opacity: 1, duration: 1, delay: 1});
         
     },[]);
    
